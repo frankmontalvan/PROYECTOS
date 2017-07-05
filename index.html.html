@@ -1,0 +1,53 @@
+<! DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="	UTF-8">
+    <title> hola Firebase</title>
+    <script 
+            src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js">
+    </script>
+    </head>
+  <body>
+      INFO1:<input type="text" id= "0"><br>
+     
+      <button id="save_button">SAVE</button>
+      <button id="clear_button">CLEAR</button>
+      <button id="load_button">LOAD</button>
+   
+ 
+<script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js">
+</script>
+<script>
+    
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyA-ryh5BuWrajORYLMvSJztVjW2DIGdL5c",
+    authDomain: "miyarawatch.firebaseapp.com",
+    databaseURL: "https://miyarawatch.firebaseio.com",
+    projectId: "miyarawatch",
+    storageBucket: "miyarawatch.appspot.com",
+    messagingSenderId: "507060016870"
+  };
+  firebase.initializeApp(config);
+    
+    var rootRef = firebase.database().ref().child('Hackatom');
+    $('#save_button').click(function(){
+        rootRef.set({
+            0:$('#0').val()            
+            });
+        });
+    $('#clear_button').click(function(){
+        $('#0').val('')
+        
+    });
+    
+    $('#load_button').click(function(){
+        rootRef.on('value',function(snapshot){
+            $('#0').val(snapshot.child('0').val());
+           
+        })
+    })
+    
+    
+</script>
+      
